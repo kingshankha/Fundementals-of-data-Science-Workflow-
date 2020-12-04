@@ -15,14 +15,14 @@ Created on Thu Nov 19 11:44:32 2020
 import os
 import pandas as pd
 
-df=pd.read_csv("Toyota.csv",index_col=0,na_values=["??","????"])
-df2=df.copy()
+df = pd.read_csv("Toyota.csv", index_col=0, na_values=["??", "????"])
+df2 = df.copy()
 
 # =============================================================================
 # ## Frequency Table  Uni variable analysis
 # 
 # =============================================================================
-freq_table=pd.crosstab(index=df2["FuelType"],columns='count',dropna=True)
+freq_table = pd.crosstab(index=df2["FuelType"], columns='count', dropna=True)
 
 # =============================================================================
 # ##  Two way table 
@@ -31,22 +31,23 @@ freq_table=pd.crosstab(index=df2["FuelType"],columns='count',dropna=True)
 # 
 # =============================================================================
 
-Two_way_table=pd.crosstab(index=df2["Automatic"],columns
-            =df2["FuelType"],dropna=True)
+Two_way_table = pd.crosstab(index=df2["Automatic"], columns
+=df2["FuelType"], dropna=True)
 
 # =============================================================================
 # ##Joint Probability
 # ##probablity  of two indipendent event happening at the same time
 # =============================================================================
 
-Joint_probability=pd.crosstab(index=df2["Automatic"],columns=df2["FuelType"],dropna=True,normalize=True)
+Joint_probability = pd.crosstab(index=df2["Automatic"], columns=df2["FuelType"], dropna=True, normalize=True)
 
 # =============================================================================
 # ## MArginal Probability
-# ##Marginal probability is the probability of an event irrespective of the outcome of another variable.
+# ##Marginal probability is the probability of an EVENT irrespective of the outcome of another EVENT.
 # =============================================================================
 
-marginal_probability=pd.crosstab(index=df2["Automatic"],columns=df["FuelType"],margins=True,dropna=True,normalize=True)
+marginal_probability = pd.crosstab(index=df2["Automatic"], columns=df["FuelType"], margins=True, dropna=True,
+                                   normalize=True)
 
 # ============== ===============================================================
 # ## conditional probability
@@ -54,7 +55,8 @@ marginal_probability=pd.crosstab(index=df2["Automatic"],columns=df["FuelType"],m
 # ## normalize="index" to get the rowsum=1;
 # ##1 given the type of gearbox
 # =============================================================================
-conditional_probability=pd.crosstab(index=df2["Automatic"],columns=df2["FuelType"],dropna=True,normalize="index",margins=True)
+conditional_probability = pd.crosstab(index=df2["Automatic"], columns=df2["FuelType"], dropna=True, normalize="index",
+                                      margins=True)
 
 # =============================================================================
 # Normalization turns quantitetive values to proportions 
@@ -65,11 +67,11 @@ conditional_probability=pd.crosstab(index=df2["Automatic"],columns=df2["FuelType
 # =============================================================================
 
 
-conditional_probability2=pd.crosstab(index=df2["Automatic"],columns=df2["FuelType"],dropna=True,normalize="columns",margins=True)
-
+conditional_probability2 = pd.crosstab(index=df2["Automatic"], columns=df2["FuelType"], dropna=True,
+                                       normalize="columns", margins=True)
 
 # =============================================================================
-# ####  COrrelation #####
+# ####  Correlation #####
 # 
 # ##Sterngth of association between two variables 
 # 
@@ -82,6 +84,8 @@ conditional_probability2=pd.crosstab(index=df2["Automatic"],columns=df2["FuelTyp
 # ## extract numerical variables from the pandas dataframe 
 # 
 # =============================================================================
-numerical_data_vars=df2.select_dtypes(exclude=[object])
+# %%
+numerical_data_vars = df2.select_dtypes(exclude=[object])
 
-corr_matrix=numerical_data_vars.corr(method="pearson")
+corr_matrix = numerical_data_vars.corr(method="pearson")
+print(corr_matrix)
